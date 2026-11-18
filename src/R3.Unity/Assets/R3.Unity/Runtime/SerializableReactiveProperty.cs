@@ -1,4 +1,11 @@
-﻿using System;
+﻿// The bases (Observable<T>, ReadOnlyReactiveProperty<T>, ReactiveProperty<T>) live in the
+// precompiled R3.dll and cannot carry [Serializable] in source. Unity 7's serialization
+// analyzer flags this class for that (UAC1002) even though only the derived [SerializeField]
+// T value field is serialized; MakeSerializable does not apply to [SerializeField] fields,
+// so the warning is suppressed here.
+#pragma warning disable UAC1002
+
+using System;
 using UnityEngine;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -152,3 +159,5 @@ namespace R3
 
 #endif
 }
+
+#pragma warning restore UAC1002
